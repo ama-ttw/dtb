@@ -2,14 +2,14 @@ import cv2
 import glob
 from pathlib import Path
 from fractions import Fraction
-from my_modules import calc, img_proc, convert
+from modules import calc, img_proc, convert
 import config
-import my_modules.settings as SETTINGS
+import modules.settings as SETTINGS
 
 
 if __name__ == '__main__':
     # 指定ディレクトリ内のpng画像パスをfor文で回す
-    files = glob.glob(config.input_imgs_directory +
+    files = glob.glob(config.input_imgs_directory + 'animals/' +
                       config.target_animal_regexp + '.png')
     for file in files:
         # ファイル名から動物名を取得
@@ -23,7 +23,7 @@ if __name__ == '__main__':
         while (rotation < SETTINGS.ONE_ROTATION):
             # αチャンネルの処理
             a_channel = orig_img[:, :, 3]
-            rotated_a_channel = img_proc.rotate_img_or_channel(
+            rotated_a_channel = img_proc.rotate(
                 a_channel, rotation)
             rotated_h, rotated_w = rotated_a_channel.shape[:2]
             centroid = calc.centroid(
@@ -37,7 +37,7 @@ if __name__ == '__main__':
             dtb_rotation = convert.to_dtb_rot(rotation)
             # BGRチャンネルの処理
             bgr_channel = orig_img[:, :, :3]
-            rotated_bgr_channel = img_proc.rotate_img_or_channel(
+            rotated_bgr_channel = img_proc.rotate(
                 bgr_channel, rotation)
             circle_added_bgr_channel = cv2.circle(
                 rotated_bgr_channel,

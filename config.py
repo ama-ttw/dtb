@@ -1,4 +1,4 @@
 imgs_directory = './images/'
-input_imgs_directory = imgs_directory+'input_animals/'
-output_imgs_directory = imgs_directory+'result/uprights/'
-target_animal_regexp = '*'
+input_animals_directory = imgs_directory+'input/animals/'
+output_imgs_directory = imgs_directory+'output/'
+target_animal_regexp = 'Lion'

@@ -1,5 +1,5 @@
 from fractions import Fraction
-import my_modules.settings as SETTINGS
+import modules.settings as SETTINGS
 
 
 def to_dtb_rot(num):

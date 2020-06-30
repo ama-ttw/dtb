@@ -1,6 +1,7 @@
 import numpy as np
 import cv2
-import my_modules.settings as SETTINGS
+import modules.settings as SETTINGS
+import imutils
 
 
 def add_dtb_bg(templ_img):
@@ -18,7 +19,7 @@ def add_dtb_bg(templ_img):
     return bg_added_img
 
 
-def rotate_img_or_channel(img, i):
+def rotate(img, i):
     h, w = img.shape[:2]
     # 回転角の指定
     angle = 360/SETTINGS.ONE_ROTATION*(-i)
@@ -39,3 +40,10 @@ def rotate_img_or_channel(img, i):
     img_rot = cv2.warpAffine(
         img, affine_matrix, size_rot)
     return img_rot
+
+
+def show(img):
+    resized_img = imutils.resize(img, height=500)
+    cv2.imshow('image', resized_img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()

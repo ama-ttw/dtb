@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-import my_modules.settings as SETTINGS
+import modules.settings as SETTINGS
 
 
 def bottom(a_channel):
