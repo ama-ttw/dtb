@@ -1,4 +1,5 @@
 imgs_directory = './images/'
 input_animals_directory = imgs_directory+'input/animals/'
 output_imgs_directory = imgs_directory+'output/'
-target_animal_regexp = 'Horse'
+query_img_path = imgs_directory + 'input/captures/10.png'
+target_animal_regexp = '*'

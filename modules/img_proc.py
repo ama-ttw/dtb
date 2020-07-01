@@ -43,7 +43,7 @@ def rotate(img, i):
 
 
 def show(img):
-    resized_img = imutils.resize(img, height=500)
+    resized_img = imutils.resize(img, height=SETTINGS.SHOW_HEIGHT)
     cv2.imshow('image', resized_img)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
@@ -59,3 +59,11 @@ def thresh(a_channel):
     _, a_channel = cv2.threshold(
         a_channel, SETTINGS.THRESH_A_CHANNEL, 255, cv2.THRESH_BINARY)
     return a_channel
+
+
+def draw_polyline(img, pts):
+    cv2.polylines(img, [pts], True, (0, 0, 255), thickness=4)
+
+
+def draw_circle(img, pt):
+    cv2.circle(img, pt, 5, (0, 255, 0), thickness=-1)
