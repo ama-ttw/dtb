@@ -26,7 +26,6 @@ def matching(templ_img, query_img,
     # 特徴量をマッチング状況に応じてソート
     matches = sorted(matches, key=lambda x: x.distance)
     min_distance = matches[0].distance
-
     '''
     print("min_dist\t", min_distance)
     print("len_templ\t", len(templ_kp))

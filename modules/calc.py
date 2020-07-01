@@ -1,11 +1,11 @@
 import cv2
 import numpy as np
 import modules.settings as SETTINGS
+from modules import img_proc
 
 
 def bottom(a_channel):
-    _, a_channel = cv2.threshold(
-        a_channel, SETTINGS.THRESH_A_CHANNEL, 255, cv2.THRESH_BINARY)
+    a_channel = img_proc.thresh(a_channel)
     whites = np.squeeze(np.dstack(np.where(a_channel == 255)))
     bottom_indexs = np.where(whites[:, 0] == max(whites[:, 0]))
     bottom_length = len(bottom_indexs[0])
@@ -14,8 +14,7 @@ def bottom(a_channel):
 
 
 def centroid(a_channel):
-    _, a_channel = cv2.threshold(
-        a_channel, SETTINGS.THRESH_A_CHANNEL, 255, cv2.THRESH_BINARY)
+    a_channel = img_proc.thresh(a_channel)
     whites = np.squeeze(np.dstack(np.where(a_channel == 255)))
     cy, cx = np.mean(whites, axis=0)
     return cx, cy
