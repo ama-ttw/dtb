@@ -25,37 +25,33 @@ if __name__ == '__main__':
             templ_img, width=int(SETTINGS.WIDTH_ANIMALS[animal]))
         templ_a_channel = templ_img[:, :, 3]
         templ_img = img_proc.add_dtb_bg(templ_img)
-        query_mask = img_proc.thresh(templ_a_channel)
+        templ_mask = img_proc.thresh(templ_a_channel)
         templ_h, templ_w = templ_img.shape[:2]
-        M_templ2query_1, corner_pts_1, min_distance_1 = akaze.matching(
-            templ_img, query_img, query_mask)
-        print(min_distance_1)
-        if (min_distance_1 <= 33):
-            # クエリーのテンプレコーナーを折れ線で囲う
-            cv2.polylines(
-                result_img, [corner_pts_1], True, (0, 255, 255), thickness=4)
-            search_area_mask_1 = cv2.warpPerspective(
-                templ_a_channel, M_templ2query_1, (query_w, query_h))
-            search_area_mask_1 = img_proc.thresh_inv(search_area_mask_1)
-            M_templ2query_2, corner_pts_2, min_distance_2 = akaze.matching(
-                templ_img, query_img,
-                query_mask, search_area_mask_1)
-            print(min_distance_2)
-            while (min_distance_2 <= 15):
-                # クエリーのテンプレコーナーを折れ線で囲う
-                cv2.polylines(
-                    result_img, [corner_pts_2], True, (0, 255, 255), thickness=4)
-                search_area_mask_2 = cv2.warpPerspective(
-                    templ_a_channel, M_templ2query_2, (query_w, query_h))
-                search_area_mask_2 = img_proc.thresh_inv(
-                    search_area_mask_2)
-                search_area_mask = cv2.bitwise_and(
-                    search_area_mask_1, search_area_mask_2)
-                M_templ2query_2, corner_pts_2, min_distance_2 = akaze.matching(
-                    templ_img, query_img,
-                    query_mask, search_area_mask)
-                search_area_mask_1 = search_area_mask
-            img_proc.show(result_img)
+
+    # 全範囲を探索する
+    M_templ2query, corner_pts, min_distance = akaze.matching(
+        templ_img, query_img, templ_mask)
+
+    firstLoop = True
+    while (min_distance <= 5):
+        cv2.polylines(
+            result_img, [corner_pts], True, (0, 255, 255), thickness=4)
+        search_area_mask = cv2.warpPerspective(
+            templ_a_channel, M_templ2query, (query_w, query_h))
+        search_area_mask = img_proc.thresh_inv(search_area_mask)
+        if firstLoop:
+            search_area_mask_old = search_area_mask
+            firstLoop = False
+        else:
+            search_area_mask = cv2.bitwise_and(
+                search_area_mask, search_area_mask_old)
+        # 探索範囲を探索する
+        M_templ2query, corner_pts, min_distance = akaze.matching(
+            templ_img, query_img,
+            templ_mask, search_area_mask)
+        search_area_mask_old = search_area_mask
+
+        img_proc.show(result_img)
         '''
         animal_bottom_vector = (
             pts[0][2][0]-pts[0][1][0], -(pts[0][2][1]-pts[0][1][1]))

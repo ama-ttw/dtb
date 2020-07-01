@@ -1,6 +1,6 @@
 WIDTH_ANIMALS = {'Alpaca':	204.8,
                  'Camel':	250.4,
-                 'Capybara':	230.8,
+                 'Capybara':	250.8,
                  'Cattle':	333,
                  'Cheetah':	293.76,
                  'Reindeer':	261.6,

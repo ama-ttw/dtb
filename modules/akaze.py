@@ -1,15 +1,16 @@
 import cv2
 import numpy as np
+from modules import img_proc
 
 
 def matching(templ_img, query_img,
              templ_mask=None, query_mask=None, return_corners=True):
-    '''
+
     if (templ_mask is not None):
         img_proc.show(templ_mask)
     if (query_mask is not None):
         img_proc.show(query_mask)
-    '''
+
     # 画像をグレースケールに変換
     gray1 = cv2.cvtColor(templ_img, cv2.COLOR_BGR2GRAY)
     gray2 = cv2.cvtColor(query_img, cv2.COLOR_BGR2GRAY)
@@ -25,8 +26,8 @@ def matching(templ_img, query_img,
     matches = sorted(matches, key=lambda x: x.distance)
     min_distance = matches[0].distance
     # 位置計算
-    src_pts = np.float32([templ_kp[m.trainIdx].pt for m in matches[:13]])
-    dst_pts = np.float32([query_kp[m.queryIdx].pt for m in matches[:13]])
+    src_pts = np.float32([templ_kp[m.trainIdx].pt for m in matches[:15]])
+    dst_pts = np.float32([query_kp[m.queryIdx].pt for m in matches[:15]])
     M, mask = cv2.findHomography(src_pts, dst_pts, cv2.RANSAC)
     if return_corners:
         # 画像４隅の角座標を取得
