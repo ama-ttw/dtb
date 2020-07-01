@@ -53,3 +53,9 @@ def thresh_inv(a_channel):
     _, a_channel = cv2.threshold(
         a_channel, SETTINGS.THRESH_A_CHANNEL, 255, cv2.THRESH_BINARY_INV)
     return a_channel
+
+
+def thresh(a_channel):
+    _, a_channel = cv2.threshold(
+        a_channel, SETTINGS.THRESH_A_CHANNEL, 255, cv2.THRESH_BINARY)
+    return a_channel
