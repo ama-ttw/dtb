@@ -1,3 +1,4 @@
 # dtb
 You can use *rotation.py* and *mathing.py*  
-It produce upright animals and the rotation as image files.
+*rotation.py* produce upright animals and the rotation as image files.  
+*mathing.py* produce the position of animals and matrixs.
