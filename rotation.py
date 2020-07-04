@@ -65,9 +65,9 @@ if __name__ == '__main__':
             result_img = cv2.merge(
                 (circle_added_bgr_channel, rotated_a_channel))
             # リザルト画像を保存する
-            # if direction == 'upright':
-            cv2.imwrite(config.output_imgs_directory+animal+'.png',
-                        result_img)
+            if direction == 'upright':
+                cv2.imwrite(config.output_imgs_directory+animal+'_'+dtb_rotation+'.png',
+                            result_img)
             # 1fだけ回転させる
             rotation += Fraction(1, SETTINGS.FRAME)
     print(direction_rotation_animals)

@@ -8,7 +8,7 @@ WIDTH_ANIMALS = {'Alpaca':	203.947825793887,
                  'Elephant':	500.15297442766524,
                  'Gibbon': 192.77573133694764,
                  'Chick':	96.00130207450313,
-                 'Giraffe':	409.46496854456774,
+                 'Giraffe':	404.85824197265805,
                  'Goat':	171.58027971635684,
                  'Hedgehog':	125.9441849243663,
                  'Hippopotamus':	311.65885705068604,
@@ -31,19 +31,17 @@ WIDTH_ANIMALS = {'Alpaca':	203.947825793887,
 ONE_ROTATION = 8
 FRAME = 12
 
+THRESH_A_CHANNEL = 127
+RGB_BGCOLOR = [49, 208, 251]
+MARKER_SIZE = 0.03
+QUERY_WIDTH = 1080    # 基本固定
+SHOW_HEIGHT = 700
+MATCHES_LEN = 8
+
 # 直立時の条件定数
 UPRIGHT_DISTANCE = 3   # 底部と重心の距離. 低いほど判定厳しく
 UPRIGHT_LENGTH = 3.786    # 底部の平らな長さ. 高いほど判定厳しく
 
-THRESH_A_CHANNEL = 127
-
-RGB_BGCOLOR = [49, 208, 251]
-
-MARKER_SIZE = 0.01
-
-SHOW_HEIGHT = 700
-
-EXPAND = 1.65   # 1.63
-QUERY_WIDTH = 1080
-
-MIN_DISTANCE = 22    # 23以上　低いほど判定厳しく
+EXPAND = 2   # 1.63　低いほうが安定　高いほうがたくさん見つけられる
+MIN_DISTANCE = 20   # 23以上　低いほど判定厳しく
+MAX_DISTANCE = 47   # 低いほど判定厳しく

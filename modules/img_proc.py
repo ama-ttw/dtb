@@ -73,12 +73,12 @@ def zerofill(a_channel):
     return a_channel
 
 
-def draw_polyline(img, pts):
-    cv2.polylines(img, [pts], True, (0, 255, 0), thickness=4)
+def draw_polyline(img, pts, size=4):
+    cv2.polylines(img, [pts], True, (0, 255, 0), thickness=size)
 
 
-def draw_circle(img, pt):
-    cv2.circle(img, pt, 20, (0, 0, 255), thickness=-1)
+def draw_circle(img, pt, size=20):
+    cv2.circle(img, pt, size, (0, 0, 255), thickness=-1)
 
 
 def extract_a_channel(rgba_img):
